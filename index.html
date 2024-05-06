@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h2 {
+            color: #333;
+        }
+        .container {
+            width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        input[type="text"] {
+            width: calc(100% - 70px);
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+            text-align: left;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+        }
+        li span {
+            margin-left: 10px;
+            cursor: pointer;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <h2>To-Do List</h2>
+    <div class="container">
+        <input type="text" id="taskInput" placeholder="Enter your task">
+        <button onclick="addTask()">ADD</button>
+        <ul id="taskList">
+        </ul>
+    </div>
+
+    <script>
+        function addTask() {
+            var taskInput = document.getElementById("taskInput");
+            var taskList = document.getElementById("taskList");
+            var task = taskInput.value.trim();
+
+            if (task === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            var li = document.createElement("li");
+            li.textContent = task;
+            
+            var span = document.createElement("span");
+            span.textContent = " ❌";
+            span.style.color = "#ff0000";
+            span.style.cursor = "pointer";
+            span.onclick = function() {
+                removeTask(this);
+            };
+
+            li.appendChild(span);
+            taskList.appendChild(li);
+
+            taskInput.value = "";
+        }
+
+        function removeTask(taskElement) {
+            taskElement.parentNode.remove();
+        }
+    </script>
+</body>
+</html>
